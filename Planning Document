@@ -104,7 +104,6 @@ Controllers
 
   post  '/signup'
         '/login'
-        '/users'
         '/characters'
         '/adventure-logs'
   
