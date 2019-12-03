@@ -56,6 +56,16 @@ class UserController < ApplicationController
   end
 
   delete '/users/:slug' do
-
+    if logged_in?
+      user =  User.find_by_slug(params[:slug])
+      if user&.id == session[:user_id]
+        user.destroy
+        redirect '/logout'
+      else
+        redirect '/dashboard'
+      end
+    else
+      redirect '/login'
+    end
   end
 end
