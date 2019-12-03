@@ -1,0 +1,116 @@
+Models- 
+
+User
+  -email
+  -password
+  -characters
+  -Logs (through characters)
+  -Magic Items? (through logs? characters?)
+  -DCI?
+
+Character
+  -xp
+  -gold
+  -magic items (through logs?)
+  -logs
+  -Downtime
+  -Adventurer's League flag
+
+  ???
+  -class(es)
+  -level
+  -race
+  -ability scores
+  -skills
+  -feats
+  -inventory
+
+Log
+  -Adventure code/Name/Session
+  -Dungeon Master -Name -DCI
+  -Gold Gained / spent
+  -Downtime Gained / spent
+  -Magic Items gained/lost
+  -Magic Items in reserve
+  -Mundane Items gained/lost
+  -consumables gained/lost
+  -Story Awards gained/lost
+  -Notes
+
+Magic Item?
+  -Tied to Log that character gained?
+  -if traded, how much info would be transferred?
+
+Dungeon Master? (or just User?)
+Trade?
+Story Award?
+Class?
+Race?
+Feat?
+Skill?
+Inventory?
+Mundane items?
+Consumables?
+
+Views
+  login
+  signup
+  index
+  dashboard
+  layout
+  layouts -
+    header
+    footer
+  users- 
+    delete
+    edit
+    index
+    show
+  characters -
+    delete
+    edit
+    index
+    show
+    new
+  adventure-logs -
+    delete
+    edit
+    index
+    show
+    new
+
+
+Controllers
+
+  get   '/'
+        '/login'
+        '/logout'
+        '/signup'
+        '/dashboard'
+        '/users/:slug'
+        '/users/:slug/edit'
+        '/users/:slug/delete'
+        '/characters'
+        '/characters/new'
+        '/characters/:slug'
+        '/characters/:slug/edit'
+        '/characters/:slug/delete'
+        '/characters/:slug/adventure-logs'
+        '/adventure-logs'
+        '/adventure-logs/new'
+        '/adventure-logs/:id'
+        '/adventure-logs/:id/edit'
+        '/adventure-logs/:id/delete'
+
+  post  '/signup'
+        '/login'
+        '/users'
+        '/characters'
+        '/adventure-logs'
+  
+  patch '/users/:slug'
+        '/characters/:slug'
+        '/adventure-logs/:id'
+  delete  '/users/:slug'
+          '/characters/:slug'
+          '/adventure-logs/:id'
