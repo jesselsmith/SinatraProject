@@ -10,4 +10,16 @@ class UserController < ApplicationController
   get '/users/:slug/delete' do
 
   end
+
+  post '/users' do
+
+  end
+
+  patch '/users/:slug' do
+
+  end
+
+  delete '/users/:slug' do
+
+  end
 end
