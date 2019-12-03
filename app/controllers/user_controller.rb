@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   get '/users/:slug' do
     if logged_in?
-      @user =  User.find_by_slug(params[:slug])
+      @user = User.find_by_slug(params[:slug])
       if @user&.id == session[:user_id]
         erb :'users/show'
       else
@@ -14,7 +14,7 @@ class UserController < ApplicationController
 
   get '/users/:slug/edit' do
     if logged_in?
-      @user =  User.find_by_slug(params[:slug])
+      @user = User.find_by_slug(params[:slug])
       if @user&.id == session[:user_id]
         erb :'users/edit'
       else
@@ -27,7 +27,7 @@ class UserController < ApplicationController
 
   get '/users/:slug/delete' do
     if logged_in?
-      @user =  User.find_by_slug(params[:slug])
+      @user = User.find_by_slug(params[:slug])
       if @user&.id == session[:user_id]
         erb :'users/delete'
       else
@@ -40,9 +40,10 @@ class UserController < ApplicationController
 
   patch '/users/:slug' do
     if logged_in?
-      user =  User.find_by_slug(params[:slug])
+      user = User.find_by_slug(params[:slug])
       if user&.id == session[:user_id]
-        if !params[:user][:name].empty? && !params[:user][:email].empty? && !params[:user][:password].empty?
+        if !params[:user][:name].empty? && !params[:user][:email].empty? &&
+           !params[:user][:password].empty?
           user.update(params[:user])
         else
           redirect "/users/#{params[:slug]}/edit"
@@ -57,7 +58,7 @@ class UserController < ApplicationController
 
   delete '/users/:slug' do
     if logged_in?
-      user =  User.find_by_slug(params[:slug])
+      user = User.find_by_slug(params[:slug])
       if user&.id == session[:user_id]
         user.destroy
         redirect '/logout'
