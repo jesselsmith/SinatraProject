@@ -16,7 +16,7 @@ class UserController < ApplicationController
     if logged_in?
       @user =  User.find_by_slug(params[:slug])
       if @user&.id == session[:user_id]
-        erb :'users/show'
+        erb :'users/edit'
       else
         redirect '/dashboard'
       end
@@ -26,6 +26,16 @@ class UserController < ApplicationController
   end
 
   get '/users/:slug/delete' do
+    if logged_in?
+      @user =  User.find_by_slug(params[:slug])
+      if @user&.id == session[:user_id]
+        erb :'users/delete'
+      else
+        redirect '/dashboard'
+      end
+    else
+      redirect '/login'
+    end
 
   end
 
