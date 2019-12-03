@@ -1,0 +1,3 @@
+class AdventureLogController < ApplicationController
+
+end
