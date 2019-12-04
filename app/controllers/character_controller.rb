@@ -82,20 +82,38 @@ class CharacterController < ApplicationController
     else
       redirect '/login'
     end
-
   end
 
   patch '/characters/:slug' do
-
+    if logged_in?
+      character = find_by_slug(params[:slug])
+      if character&.user == current_user
+        if valid_character_hash(params[:character])
+          character.update(params[:character])
+          redirect "/characters/#{character.slug}"
+        else
+          redirect "/characters/#{character.slug}/edit"
+        end
+      else
+        redirect '/dashboard'
+      end
+    else
+      redirect '/login'
+    end
   end
 
   delete '/characters/:slug' do
-
+    if logged_in?
+      character = find_by_slug(params[:slug])
+      character.destroy if character&.user == current_user
+      redirect "/characters/#{character.slug}"
+    else
+      redirect '/login'
+    end
   end
 
   def valid_character_hash(hash)
     !hash[:name].empty? && (hash[:level].is_a? Integer) &&
-    hash[:level].positive? && hash[:level] <= 20
+      hash[:level].positive? && hash[:level] <= 20
   end
-
 end
