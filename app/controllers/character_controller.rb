@@ -23,4 +23,16 @@ class CharacterController < ApplicationController
 
   end
 
+  post '/characters' do
+
+  end
+
+  patch '/characters/:slug' do
+
+  end
+
+  delete '/characters/:slug' do
+
+  end
+
 end
