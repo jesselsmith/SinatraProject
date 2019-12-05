@@ -1,0 +1,16 @@
+<h1>Make a new character!</h1>
+<form action="/characters" method="POST">
+  <p><strong><label for="name">Name: </label></strong>
+  <input type="text" name="name" id="name" placeholder="Firstname Lastname"></p>
+  <p><strong><label for="level">Level: </label></strong>
+  <input type="text" name="level" id="level" placeholder="1"></p>
+  <p><strong><label for="gold">Gold: </label></strong>
+  <input type="text" name="gold" id="gold" placeholder='10'></p>
+  <p><strong>Adventurer's League: </strong>
+  <input type="checkbox" name="adventurers_league" id="adventurers_league" value="true"></p>
+  <p><strong><label for="downtime">Down Time (if applicable): </label></strong>
+  <input type="text" name="downtime" id="downtime" placeholder="0"></p>
+  <p><strong><label for="faction">Faction (if applicable): </label></strong>
+  <input type="text" name="faction" id="faction" placeholder="Harpers"></p>
+  <input type="submit" value="Create Character">
+</form>
