@@ -1,0 +1,12 @@
+<h1>Edit Your Account!</h1>
+<form action="/signup" method="POST">
+  <p><strong><label for="email">Email: </label></strong>
+  <input type="email" name="email" id="email" value="<%= @user.email %>"></p>
+  <p><strong><label for="name">Full Name: </label></strong>
+  <input type="text" name="name" id="name" value="<%= @user.name %>"></p>
+  <p><strong><label for="password">Password: </label></strong>
+  <input type="password" name="password" id="password"></p>
+  <p><strong><label for="dci">DCI (if you have one): </label></strong>
+  <input type="text" name="dci" id="dci" value="<%= @user.dci %>"></p>
+  <input type="submit" value="Update Account">
+</form>

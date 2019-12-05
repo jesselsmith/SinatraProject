@@ -1,0 +1,6 @@
+<h1>Your Profile</h1>
+<h3>Name: <%= @user.name %></h3>
+<h3>Email: <%= @user.email %></h3>
+<h3>DCI #: <%= @user.dci.empty? ? 'None' : @user.dci %></h3>
+<p><a href='/users/<%= @user.slug %>/edit'>Edit Your Account Information</a></p>
+<p><a href='/users/<%= @user.slug %>/delete'>Delete Your Account</a></p>
