@@ -1,0 +1,12 @@
+<h1><%= @user.name %>'s Logs</h1>
+<% @user.adventure_logs.order(adventure_date: :desc).each do |adventure_log| %>
+  <p>
+    <a href="/adventure-logs/<%= adventure_log.id %>">
+      <%= adventure_log.adventure_name %>
+      <b>Character</b>: <%= adventure_log.character.name %> 
+      <b>Date</b>: <%= adventure_log.adventure_date %>
+    </a>
+  </p>
+<% end %>
+<p><a href='/adventure-logs/new'>Make a new Adventure Log!</a></p>
+<p><a href='/dashboard'>Back to the Dashboard</a></p>
