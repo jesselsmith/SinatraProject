@@ -1,5 +1,6 @@
 <h1>Edit Your Account!</h1>
-<form action="/signup" method="POST">
+<form action="/users/<%= user.slug %>%" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <p><strong><label for="email">Email: </label></strong>
   <input type="email" name="email" id="email" value="<%= @user.email %>"></p>
   <p><strong><label for="name">Full Name: </label></strong>
