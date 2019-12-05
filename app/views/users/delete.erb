@@ -1,0 +1,7 @@
+<h1>Are you sure you would like to delete your account?</h1>
+<form action="/users/<%= @user.slug %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <label for="delete">Delete Account:</label>
+  <input type="submit" value="Delete Account" id="delete">
+</form>
+<p><a href="/dashboard">Actually, just take me back to my dashboard</a>
