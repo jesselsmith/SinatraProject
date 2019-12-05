@@ -1,0 +1,15 @@
+<h1>
+  Are you sure you would like to delete your level <%= 
+  "#{@character.level} #{@character.character_class}, #{@character.name}?" %>
+</h1>
+<form action="/characters/<%= @character.slug %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <label for="delete">Delete Character:</label>
+  <input type="submit" value="Delete Character" id="delete">
+</form>
+<p>
+  <a href="/characters/<%= @character.slug %>">
+    Actually, just take me back to this character's page.
+  </a>
+<p>
+<p><a href="/dashboard">Back to the Dashboard</a>
