@@ -1,0 +1,20 @@
+<h1>Edit <%= @character.name %></h1>
+<form action="/characters/<%= @character.slug %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <p><strong><label for="name">Name: </label></strong>
+  <input type="text" name="name" id="name" value="<%= @character.name %>"></p>
+  <p><strong><label for="class">Class: </label></strong>
+  <input type="text" name="class" id="class" value="<%= @character.class %>"></p>
+  <p><strong><label for="level">Level: </label></strong>
+  <input type="text" name="level" id="level" value="<%= @character.level %>"></p>
+  <p><strong><label for="gold">Gold: </label></strong>
+  <input type="text" name="gold" id="gold" value='<%= @character.gold %>'></p>
+  <p><strong>Adventurer's League: </strong>
+  <input type="checkbox" name="adventurers_league" id="adventurers_league" 
+    value="true" <%= "checked" if @character.adventurers_league %>></p>
+  <p><strong><label for="downtime">Down Time (if applicable): </label></strong>
+  <input type="text" name="downtime" id="downtime" value="<%= @character.downtime %>"></p>
+  <p><strong><label for="faction">Faction (if applicable): </label></strong>
+  <input type="text" name="faction" id="faction" value="<%= @character.faction %>"></p>
+  <input type="submit" value="Create Character">
+</form>
