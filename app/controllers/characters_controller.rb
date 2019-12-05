@@ -107,9 +107,9 @@ class CharactersController < ApplicationController
 
   delete '/characters/:slug' do
     if logged_in?
-      character = find_by_slug(params[:slug])
+      character = Character.find_by_slug(params[:slug])
       character.destroy if character&.user == current_user
-      redirect "/characters/#{character.slug}"
+      redirect "/characters"
     else
       redirect '/login'
     end
