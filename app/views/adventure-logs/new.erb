@@ -1,0 +1,38 @@
+<h1>Make a new adventure log!</h1>
+<form action="/characters" method="POST">
+  <p>
+    <strong><label for="adventure_name">Adventure Name: </label></strong>
+    <input type="text" name="adventure_name" id="adventure_name" 
+      placeholder="DDAL05-01 Treasure of the Broken Horde">
+  </p>
+  <p>
+    <strong><label for="dm_name">DM Name: </label></strong>
+    <input type="text" name="dm_name" id="dm_name" placeholder="John Smith">
+  </p>
+  <p>
+    <strong><label for="dm_dci">DM DCI # (if applicable): </label></strong>
+    <input type="text" name="dm_dci" id="dm_dci" placeholder="1234567890">
+  </p>
+  <p>
+    <strong><label for="date">Date: </label></strong>
+    <input type="text" name="date_played" id="date" 
+    placeholder='<%= Date.today.strftime("%m/%d/%Y") %>'>
+  </p>
+  <p>
+    <strong><label for="gold_change">Gold Change: </label></strong>
+    <input type="text" name="gold_change" id="gold_change" placeholder="0">
+  </p>
+  <p>
+    <strong>Level Up?: </strong>
+    <input type="checkbox" name="level_up" id="level_up" value="true">
+  </p>
+  <p>
+    <strong><label for="downtime_change">Down Time Change(if applicable): </label></strong>
+    <input type="text" name="downtime_change" id="downtime_change" placeholder="0">
+  </p>
+  <p>
+    <strong><label for="notes">Notes: </label></strong>
+    <textarea name="notes" id="notes" placeholder="Record important events and notes here!">
+  </p>
+  <input type="submit" value="Create Adventure Log">
+</form>

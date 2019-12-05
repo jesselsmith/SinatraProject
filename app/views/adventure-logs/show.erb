@@ -1,0 +1,21 @@
+<h1>Adventure Name: <%= @adventure_log.adventure_name %></a>
+<h2>Character: <%= adventure_log.character.name %>
+<h3>Date Played: <%= @adventure_log.date_played %></h3>
+<h3>DM Name: <%= @adventure_log.dm_name %></h3>
+<h3>
+  DM DCI: <%= @adventure_log.dm_dci.empty? ? "N/A" : @adventure_log.dm_dci %>
+</h3>
+<h3>Leveled up?: <%= @adventure_log.level_up ? 'Yes' : 'No' %></h3>
+<h3>Gold Change: <%= @adventure_log.gold_change %></h3>
+<h3>Down Time Change: <%= @adventure_log.downtime_change %></h3>
+<h3><a href='/characters/<%= @adventure_log.character.slug %>/adventure-logs'>
+  View all of <%= adventure_log.character.name %>'s adventure logs!
+</a></h3>
+<p><a href='/adventure_logs/<%= @adventure_log.id %>/edit'>
+  Edit This Adventure Log
+</a></p>
+<p><a href='/adventure_logs/<%= @adventure_log.id %>/delete'>
+  Delete This Adventure Log
+</a></p>
+<p><a href='/adventure_logs'>All Your Adventure Logs</a></p>
+<p><a href='/dashboard'>Back to the Dashboard</a></p>
