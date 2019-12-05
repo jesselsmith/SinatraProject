@@ -42,9 +42,13 @@ class UsersController < ApplicationController
     if logged_in?
       user = User.find_by_slug(params[:slug])
       if user&.id == session[:user_id]
-        if !params[:user][:name].empty? && !params[:user][:email].empty? &&
-           !params[:user][:password].empty?
-          user.update(params[:user])
+        if !params[:user][:name].empty? && !params[:user][:email].empty?
+          if params[:user][:password].empty?
+            user.update(params[:user].except(:password))
+          else
+            user.update(params[:user])
+          end
+          redirect '/dashboard'
         else
           redirect "/users/#{params[:slug]}/edit"
         end
