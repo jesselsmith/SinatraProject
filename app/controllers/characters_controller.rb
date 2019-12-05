@@ -76,6 +76,7 @@ class CharactersController < ApplicationController
       character_hash = character_hasher(params)
       if valid_character_hash(character_hash)
         character = user.characters.build(character_hash)
+        character.save
         redirect "/characters/#{character.slug}"
       else
         redirect '/characters/new'
