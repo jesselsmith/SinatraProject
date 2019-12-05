@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_025354) do
+ActiveRecord::Schema.define(version: 2019_12_05_175926) do
 
   create_table "adventure_logs", force: :cascade do |t|
     t.string "adventure_name"
@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 2019_11_28_025354) do
     t.integer "gold_change"
     t.integer "downtime_change"
     t.string "notes"
-    t.bigint "character_id"
+    t.integer "character_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_played"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -31,9 +32,10 @@ ActiveRecord::Schema.define(version: 2019_11_28_025354) do
     t.integer "downtime"
     t.string "faction"
     t.boolean "adventurers_league"
-    t.bigint "user_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "class"
   end
 
   create_table "users", force: :cascade do |t|
