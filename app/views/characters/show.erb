@@ -1,0 +1,11 @@
+<h1><%= @character.name %></a>
+<h3>Level: <%= @character.level %></h3>
+<h3>Gold: <%= @character.gold %></h3>
+<h3>Down Time: <%= @character.downtime %></h3>
+<h3>Faction: <%= @character.faction.empty? ? "N/A" : @character.faction %></h3>
+<h3>Adventurer's League: <%= @character.adventurers_league == true ? "Yes" : "No" %></h3>
+<h3><a href='/characters/<%= @character.slug %>/adventure-logs'>View this character's adventure logs!</a></h3>
+<p><a href='/users/<%= @character.slug %>/edit'>Edit This Character</a></p>
+<p><a href='/users/<%= @character.slug %>/delete'>Delete This Character</a></p>
+<p><a href='/characters'>Back to your characters</a></p>
+<p><a href='/dashboard'>Back to the Dashboard</a></p>
