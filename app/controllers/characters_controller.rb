@@ -18,19 +18,6 @@ class CharactersController < ApplicationController
     end
   end
 
-  get '/characters/:slug' do
-    if logged_in?
-      @character = Character.find_by_slug(params[:slug])
-      if @character&.user == current_user
-        erb :'characters/show'
-      else
-        redirect '/dashboard'
-      end
-    else
-      redirect '/login'
-    end
-  end
-
   get '/characters/:slug/edit' do
     if logged_in?
       @character = Character.find_by_slug(params[:slug])
@@ -70,6 +57,19 @@ class CharactersController < ApplicationController
     end
   end
 
+  get '/characters/:slug' do
+    if logged_in?
+      @character = Character.find_by_slug(params[:slug])
+      if @character&.user == current_user
+        erb :'characters/show'
+      else
+        redirect '/dashboard'
+      end
+    else
+      redirect '/login'
+    end
+  end
+
   post '/characters' do
     if logged_in?
       user = current_user
@@ -88,7 +88,7 @@ class CharactersController < ApplicationController
 
   patch '/characters/:slug' do
     if logged_in?
-      character = find_by_slug(params[:slug])
+      character = Character.find_by_slug(params[:slug])
       if character&.user == current_user
         if valid_character_hash(params[:character])
           character.update(params[:character])
