@@ -11,7 +11,7 @@ module Concerns::Slugifiable
 
   module InstanceMethods
     def slug
-      self.class.slugify(name) + self.id.to_s
+      "#{self.class.slugify(name)}-#{self.id}"
     end
   end
 end
