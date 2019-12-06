@@ -20,7 +20,7 @@ class AdventureLogsController < ApplicationController
 
   get '/adventure-logs/:id/edit' do
     if logged_in?
-      @adventure_log = Adventure_logs.find_by(id: params[:id])
+      @adventure_log = AdventureLog.find_by(id: params[:id])
       if @adventure_log&.user == current_user
         erb :'adventure-logs/edit'
       else
@@ -33,7 +33,7 @@ class AdventureLogsController < ApplicationController
 
   get '/adventure-logs/:id/delete' do
     if logged_in?
-      @adventure_log = Adventure_logs.find_by(id: params[:id])
+      @adventure_log = AdventureLog.find_by(id: params[:id])
       if @adventure_log&.user == current_user
         erb :'adventure-logs/delete'
       else
@@ -84,9 +84,9 @@ class AdventureLogsController < ApplicationController
         log_hash = log_hasher(params[:adventure_log])
         if valid_log_hash(log_hash)
           adventure_log.update(log_hash)
-          redirect "/adventure-log/#{adventure_log.id}"
+          redirect "/adventure-logs/#{adventure_log.id}"
         else
-          redirect "/adventure-log/#{adventure_log.id}/edit"
+          redirect "/adventure-logs/#{adventure_log.id}/edit"
         end
       else
         redirect '/dashboard'

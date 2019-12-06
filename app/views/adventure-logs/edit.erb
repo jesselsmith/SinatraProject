@@ -8,8 +8,8 @@
   </p>
   <p>
     <strong><label for="character">Character: </label></strong>
-    <select name="adventure_log[character]">
-      <% @user.characters.order(:name).each do |character| %>
+    <select name="adventure_log[character_id]">
+      <% @adventure_log.user.characters.order(:name).each do |character| %>
         <option value="<%=character.id%>" 
         <%= "selected" if @adventure_log.character == character %>>
         <%= character.name %></option>
@@ -48,9 +48,8 @@
   </p>
   <p>
     <strong><label for="notes">Notes: </label></strong>
-    <textarea name="adventure_log[notes]" id="notes" rows="10" cols="60">
-      <%= @adventure_log.notes %>
-    </textarea>
+    <textarea name="adventure_log[notes]" id="notes" rows="10" 
+      cols="60"><%= @adventure_log.notes %></textarea>
   </p>
   <input type="submit" value="Update Adventure Log">
 </form>
