@@ -1,0 +1,17 @@
+<h1>
+  Are you sure you would like to delete the following adventure log?:
+</h1>
+<p><%= 
+  "#{@adventure_log.adventure_name} <b>Character</b>: #{@adventure_log.character.name} <b>Date</b>: #{@adventure_log.date_played}" %>
+</p>
+<form action="/adventure-logs/<%= @adventure_log.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <label for="delete">Delete Adventure Log:</label>
+  <input type="submit" value="Delete Adventure Log" id="delete">
+</form>
+<p>
+  <a href="/adventure-logs/<%= @adventure_log.id %>">
+    Actually, just take me back to this Adventure Log's page.
+  </a>
+<p>
+<p><a href="/dashboard">Back to the Dashboard</a></p>
