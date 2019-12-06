@@ -2,8 +2,16 @@
 <form action="/adventure-logs" method="POST">
   <p>
     <strong><label for="adventure_name">Adventure Name: </label></strong>
-    <input type="text" name="adventure_name" id="adventure_name" 
+    <input type="text" name="adventure_name" id="adventure_name" size="60"
       placeholder="DDAL05-01 Treasure of the Broken Horde">
+  </p>
+  <p>
+    <strong><label for="character">Character: </label></strong>
+    <select name="character">
+      <% @user.characters.order(:name).each do |character| %>
+        <option value="<%=character.id%>"><%= character.name %></option>
+      <% end %>
+    </select>
   </p>
   <p>
     <strong><label for="dm_name">DM Name: </label></strong>
@@ -11,12 +19,11 @@
   </p>
   <p>
     <strong><label for="dm_dci">DM DCI # (if applicable): </label></strong>
-    <input type="text" name="dm_dci" id="dm_dci" placeholder="1234567890">
+    <input type="text" name="dm_dci" id="dm_dci" size="12" placeholder="1234567890">
   </p>
   <p>
     <strong><label for="date">Date: </label></strong>
-    <input type="text" name="date_played" id="date" 
-    placeholder='<%= Date.today.strftime("%m/%d/%Y") %>'>
+    <input type="date" name="date_played" id="date">
   </p>
   <p>
     <strong><label for="gold_change">Gold Change: </label></strong>
@@ -32,7 +39,10 @@
   </p>
   <p>
     <strong><label for="notes">Notes: </label></strong>
-    <textarea name="notes" id="notes" placeholder="Record important events and notes here!">
+    <textarea name="notes" id="notes" rows="10" cols="60"
+      placeholder="Record important events and notes here!"></textarea>
   </p>
   <input type="submit" value="Create Adventure Log">
 </form>
+<p><a href='/adventure_logs'>All Your Adventure Logs</a></p>
+<p><a href='/dashboard'>Back to the Dashboard</a></p>
