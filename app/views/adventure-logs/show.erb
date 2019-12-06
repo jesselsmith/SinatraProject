@@ -6,7 +6,11 @@
   DM DCI: <%= @adventure_log.dm_dci.empty? ? "N/A" : @adventure_log.dm_dci %>
 </h3>
 <h3>Leveled up?: <%= @adventure_log.level_up ? 'Yes' : 'No' %></h3>
+<h3>Gold Gained: <%= @adventure_log.gold_gained %></h3>
+<h3>Gold Lost: <%= @adventure_log.gold_lost %></h3>
 <h3>Gold Change: <%= @adventure_log.gold_change %></h3>
+<h3>Down Time Gained: <%= @adventure_log.downtime_gained %></h3>
+<h3>Down Time Lost: <%= @adventure_log.downtime_lost %></h3>
 <h3>Down Time Change: <%= @adventure_log.downtime_change %></h3>
 <h3><a href='/characters/<%= @adventure_log.character.slug %>/adventure-logs'>
   View all of <%= @adventure_log.character.name %>'s adventure logs!

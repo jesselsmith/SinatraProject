@@ -32,9 +32,14 @@
       value="<%= @adventure_log.date_played %>">
   </p>
   <p>
-    <strong><label for="gold_change">Gold Change: </label></strong>
-    <input type="text" name="adventure_log[gold_change]" id="gold_change" 
-      value="<%= @adventure_log.gold_change %>">
+    <strong><label for="gold_gained">Gold Gained: </label></strong>
+    <input type="number" name="adventure_log[gold_gained]" id="gold_gained" 
+      value="<%= @adventure_log.gold_gained %>">
+  </p>
+   <p>
+    <strong><label for="gold_lost">Gold Spent/Lost: </label></strong>
+    <input type="number" name="adventure_log[gold_lost]" id="gold_lost" 
+      value="<%= @adventure_log.gold_lost %>">
   </p>
   <p>
     <strong>Level Up?: </strong>
@@ -42,9 +47,14 @@
       value="true" <%= "checked" if @adventure_log.level_up %>>
   </p>
   <p>
-    <strong><label for="downtime_change">Down Time Change(if applicable): </label></strong>
-    <input type="text" name="adventure_log[downtime_change]" id="downtime_change" 
-      value="<%= @adventure_log.downtime_change %>">
+    <strong><label for="downtime_gained">Down Time Gained(if applicable): </label></strong>
+    <input type="number" name="adventure_log[downtime_gained]" id="downtime_gained" 
+      value="<%= @adventure_log.downtime_gained %>">
+  </p>
+  <p>
+    <strong><label for="downtime_lost">Down Time Used(if applicable): </label></strong>
+    <input type="number" name="adventure_log[downtime_lost]" id="downtime_lost" 
+      value="<%= @adventure_log.downtime_lost %>">
   </p>
   <p>
     <strong><label for="notes">Notes: </label></strong>
