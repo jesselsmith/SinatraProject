@@ -22,5 +22,8 @@
 <p><a href='/adventure-logs/<%= @adventure_log.id %>/delete'>
   Delete This Adventure Log
 </a></p>
+<p><a href='/characters/<%= @adventure_log.character.slug %>'>
+  Back to <%= @adventure_log.character.name %>'s page
+</a></p>
 <p><a href='/adventure-logs'>All Your Adventure Logs</a></p>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>

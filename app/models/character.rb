@@ -36,4 +36,22 @@ class Character < ActiveRecord::Base
   def total_downtime_lost
     self.adventure_logs.sum(&:downtime_lost)
   end
+
+  def gold_before(adventure_log)
+    self.starting_gold + self.adventure_logs.order(date_played: :asc, id: :asc)
+                             .take_while { |log| log != adventure_log }
+                             .sum(&:gold_change)
+  end
+
+  def downtime_before(adventure_log)
+    self.starting_downtime + self.adventure_logs.order(date_played: :asc, id: :asc)
+                             .take_while { |log| log != adventure_log }
+                             .sum(&:downtime_change)
+  end
+
+  def level_before(adventure_log)
+    self.starting_level + self.adventure_logs.order(date_played: :asc, id: :asc)
+                             .take_while { |log| log != adventure_log }
+                             .sum { |log| log.level_up ? 1 : 0 }
+  end
 end
