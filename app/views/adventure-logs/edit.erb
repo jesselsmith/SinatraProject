@@ -3,8 +3,8 @@
   <input id="hidden" type="hidden" name="_method" value="patch">
   <p>
     <strong><label for="adventure_name">Adventure Name: </label></strong>
-    <input type="text" name="adventure_log[adventure_name]" id="adventure_name" size="60"
-      value="<%= @adventure_log.adventure_name %>">
+    <input type="text" name="adventure_log[adventure_name]" id="adventure_name"
+      size="60"value="<%= @adventure_log.adventure_name %>">
   </p>
   <p>
     <strong><label for="character">Character: </label></strong>
@@ -47,14 +47,32 @@
       value="true" <%= "checked" if @adventure_log.level_up %>>
   </p>
   <p>
-    <strong><label for="downtime_gained">Down Time Gained(if applicable): </label></strong>
-    <input type="number" name="adventure_log[downtime_gained]" id="downtime_gained" 
-      value="<%= @adventure_log.downtime_gained %>">
+    <strong>
+      <label for="downtime_gained">Down Time Gained(if applicable): </label>
+    </strong>
+    <input type="number" name="adventure_log[downtime_gained]" 
+      id="downtime_gained" value="<%= @adventure_log.downtime_gained %>">
   </p>
   <p>
-    <strong><label for="downtime_lost">Down Time Used(if applicable): </label></strong>
-    <input type="number" name="adventure_log[downtime_lost]" id="downtime_lost" 
+    <strong>
+      <label for="downtime_lost">Down Time Used(if applicable): </label>
+    </strong>
+    <input type="number" name="adventure_log[downtime_lost]" id="downtime_lost"
       value="<%= @adventure_log.downtime_lost %>">
+  </p>
+  <p>
+    <strong><label for="magic_items_gained">
+      Magic Items Gained (put each on its own line): </label>
+    </strong>
+    <textarea name="adventure_log[magic_items_gained]" id="magic_items_gained"
+    rows="5" cols="50"><%= @adventure_log.magic_items_gained %></textarea>
+  </p>
+  <p>
+    <strong><label for="magic_items_lost">
+      Magic Items Lost (put each on its own line, must be exact): </label>
+    </strong>
+    <textarea name="adventure_log[magic_items_lost]" id="magic_items_lost"
+      rows="5" cols="50"><%= @adventure_log.magic_items_lost %></textarea>
   </p>
   <p>
     <strong><label for="notes">Notes: </label></strong>

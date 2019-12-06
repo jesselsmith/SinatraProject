@@ -64,7 +64,8 @@ class AdventureLogsController < ApplicationController
         log_hash = log_hasher(params)
         if valid_log_hash(log_hash)
           adventure_log = character.adventure_logs.build(log_hash)
-          adventure_log.save
+          MagicItem.new_from_adventure_log(adventure_log)
+          character.save
           redirect "/adventure-logs/#{adventure_log.id}"
         else
           redirect '/adventure-logs/new'
@@ -106,7 +107,7 @@ class AdventureLogsController < ApplicationController
     end
   end
 
-  # takes a hash from a form and returns a hash useful for creating a character
+  # takes a hash from a form and returns a hash useful for creating a log
   def log_hasher(hash)
     log_hash = hash.except(:character)
     log_hash[:gold_change] = hash[:gold_change].to_i
