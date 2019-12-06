@@ -118,15 +118,15 @@ class CharactersController < ApplicationController
   # takes a hash from a form and returns a hash useful for creating a character
   def character_hasher(hash)
     character_hash = hash
-    character_hash[:level] = hash[:level].to_i
-    character_hash[:gold] = hash[:gold].to_i
-    character_hash[:downtime] = hash[:downtime].to_i
+    character_hash[:starting_level] = hash[:starting_level].to_i
+    character_hash[:starting_gold] = hash[:starting_gold].to_i
+    character_hash[:starting_downtime] = hash[:starting_downtime].to_i
     character_hash[:adventurers_league] = (hash[:adventurers_league] == 'true')
     character_hash
   end
 
   def valid_character_hash(hash)
     !hash[:name].empty? && !hash[:character_class].empty? &&
-      hash[:level].positive? && hash[:level] <= 20
+      hash[:starting_level].positive? && hash[:starting_level] <= 20
   end
 end

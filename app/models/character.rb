@@ -6,14 +6,18 @@ class Character < ActiveRecord::Base
   include Concerns::Slugifiable::InstanceMethods
 
   def gold
-    self.starting_gold + self.adventure_logs.sum{|log| log.gold_change} 
+    self.starting_gold + self.adventure_logs.sum(&:gold_change)
   end
 
   def downtime
-    self.starting_downtime + self.adventure_logs.sum{|log| log.downtime_change}
+    self.starting_downtime + self.adventure_logs.sum(&:downtime_change)
   end
 
   def level
-    self.starting_level + self.adventure_logs.sum{|log| log.level_up ? 1 : 0 }
+    current_level = self.starting_level +
+                    self.adventure_logs.sum { |log| log.level_up ? 1 : 0 }
+
+    current_level = 20 if current_level > 20
+    current_level
   end
 end

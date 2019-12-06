@@ -11,12 +11,12 @@
       value="<%= @character.character_class %>">
   </p>
   <p>
-    <strong><label for="level">Level: </label></strong>
-    <input type="text" name="character[level]" id="level" value="<%= @character.level %>">
+    <strong><label for="starting_level">Starting Level: </label></strong>
+    <input type="text" name="character[starting_level]" id="starting_level" value="<%= @character.starting_level %>">
   </p>
   <p>
-    <strong><label for="gold">Gold: </label></strong>
-    <input type="text" name="character[gold]" id="gold" value='<%= @character.gold %>'>
+    <strong><label for="starting_gold">Starting Gold: </label></strong>
+    <input type="text" name="character[starting_gold]" id="starting_gold" value='<%= @character.starting_gold %>'>
   </p>
   <p>
     <strong>Adventurer's League: </strong>
@@ -24,9 +24,9 @@
       value="true" <%= "checked" if @character.adventurers_league %>>
   </p>
   <p>
-    <strong><label for="downtime">Down Time (if applicable): </label></strong>
-    <input type="text" name="character[downtime]" id="downtime"
-      value="<%= @character.downtime %>">
+    <strong><label for="starting_downtime">Starting Down Time (if applicable): </label></strong>
+    <input type="text" name="character[starting_downtime]" id="starting_downtime"
+      value="<%= @character.starting_downtime %>">
   </p>
   <p>
     <strong><label for="faction">Faction (if applicable): </label></strong>
