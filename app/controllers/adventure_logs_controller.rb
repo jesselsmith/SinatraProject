@@ -78,11 +78,32 @@ class AdventureLogsController < ApplicationController
   end
 
   patch '/adventure-logs/:id' do
-  
+    if logged_in?
+      adventure_log = AdventureLog.find_by(id: params[:id])
+      if adventure_log&.user == current_user
+        log_hash = log_hasher(params[:adventure_log])
+        if valid_log_hash(log_hash)
+          adventure_log.update(log_hash)
+          redirect "/adventure-log/#{adventure_log.id}"
+        else
+          redirect "/adventure-log/#{adventure_log.id}/edit"
+        end
+      else
+        redirect '/dashboard'
+      end
+    else
+      redirect '/login'
+    end
   end
 
   delete '/adventure-logs/:id' do
-  
+    if logged_in?
+      adventure_log = AdventureLog.find_by(id: params[:id])
+      adventure_log.destroy if adventure_log&.user == current_user
+      redirect "/adventure-logs"
+    else
+      redirect '/login'
+    end
   end
 
   # takes a hash from a form and returns a hash useful for creating a character
