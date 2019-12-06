@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_193353) do
+ActiveRecord::Schema.define(version: 2019_12_06_180030) do
 
   create_table "adventure_logs", force: :cascade do |t|
     t.string "adventure_name"
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 2019_12_05_193353) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
-    t.integer "level"
-    t.integer "gold"
-    t.integer "downtime"
+    t.integer "starting_level"
+    t.integer "starting_gold"
+    t.integer "starting_downtime"
     t.string "faction"
     t.boolean "adventurers_league"
     t.integer "user_id"

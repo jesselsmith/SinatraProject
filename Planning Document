@@ -1,3 +1,49 @@
+Adding Functionality to Logs
+
+character gold, downtime, level become starting_gold, starting_downtime, etc.
+
+adventure_log#downtime_change & gold_change becomes two fields, 
+
+character#gold is a method that 
+
+starting gold + all gold gained from logs - all gold lost from logs
+
+for a total
+
+same with character#downtime
+
+Level is Starting Level + num of level ups from logs
+
+
+Add in Magic Items
+
+Add in Story Award field and track story awards gained/ lost
+
+
+
+
+ Change Class and add in class levels
+
+ Add XP for home game options?
+
+ Mundane inventory
+
+add race
+
+ability scores
+
+feats
+
+
+
+
+
+
+
+
+
+
+
 Models- 
 
 User
