@@ -1,5 +1,6 @@
 class Character < ActiveRecord::Base
   has_many :adventure_logs, dependent: :destroy
+  has_many :magic_items, dependent: :destroy
   belongs_to :user, foreign_key: "user_id"
 
   extend Concerns::Slugifiable::ClassMethods
@@ -53,5 +54,9 @@ class Character < ActiveRecord::Base
     self.starting_level + self.adventure_logs.order(date_played: :asc, id: :asc)
                              .take_while { |log| log != adventure_log }
                              .sum { |log| log.level_up ? 1 : 0 }
+  end
+
+  def magic_item_count
+    self.magic_items.length
   end
 end
