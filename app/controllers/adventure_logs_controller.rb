@@ -35,6 +35,11 @@ class AdventureLogsController < ApplicationController
     if logged_in?
       @adventure_log = AdventureLog.find_by(id: params[:id])
       if @adventure_log&.user == current_user
+        @magic_items = @adventure_log.character.magic_items -
+                       item_string_to_items(
+                         @adventure_log.magic_items_gained,
+                         @adventure_log.character_id
+                       )
         erb :'adventure-logs/edit'
       else
         redirect '/dashboard'

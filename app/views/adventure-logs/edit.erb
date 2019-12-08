@@ -7,16 +7,6 @@
       size="60"value="<%= @adventure_log.adventure_name %>">
   </p>
   <p>
-    <strong><label for="character">Character: </label></strong>
-    <select name="adventure_log[character_id]">
-      <% @adventure_log.user.characters.order(:name).each do |character| %>
-        <option value="<%=character.id%>" 
-        <%= "selected" if @adventure_log.character == character %>>
-        <%= character.name %></option>
-      <% end %>
-    </select>
-  </p>
-  <p>
     <strong><label for="dm_name">DM Name: </label></strong>
     <input type="text" name="adventure_log[dm_name]" id="dm_name" 
       value="<%= @adventure_log.dm_name %>">
@@ -68,11 +58,23 @@
     rows="5" cols="50"><%= @adventure_log.magic_items_gained %></textarea>
   </p>
   <p>
-    <strong><label for="magic_items_lost">
-      Magic Items Lost (put each on its own line, must be exact): </label>
-    </strong>
-    <textarea name="adventure_log[magic_items_lost]" id="magic_items_lost"
-      rows="5" cols="50"><%= @adventure_log.magic_items_lost %></textarea>
+    <strong>Magic Items Lost: </strong>
+    <% if @magic_items.size.zero? && 
+      @adventure_log.magic_items_lost.empty? %>
+      "Doesn't have any to lose!"
+    <% end %>
+    <ul>
+    <% @magic_items.each do |magic_item| %>
+      <li><input type="checkbox" name="adventure_log[magic_items_lost][]" 
+        id="magic_item<%= magic_item.id %>" value="<%= magic_item.id %>">
+          <%= magic_item.name %></li>
+    <% end %>
+    <% @adventure_log.magic_items_lost.split("\n").each do |magic_item| %>
+      <li><input type="checkbox" name="adventure_log[magic_items_previously_lost][]" 
+        id="<%= magic_item %>" value="<%= magic_item %>" checked>
+          <%= magic_item %></li>
+    <% end %>
+    </ul>
   </p>
   <p>
     <strong><label for="notes">Notes: </label></strong>

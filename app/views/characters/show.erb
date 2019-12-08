@@ -4,6 +4,12 @@
 <h3>Total Gold Ever Gained: <%= @character.total_gold_gained %></h3>
 <h3>Total Gold Ever Lost/Spent: <%= @character.total_gold_lost %></h3>
 <h3>Current Gold: <%= @character.gold %></h3>
+<h3>Magic Items:<h3> 
+  <ul>
+    <% @character.magic_items.each do |item| %>
+      <li><%= item.name %> </li>
+     <% end %> 
+  </ul>
 <h3>Total Down Time Ever Gained: <%= @character.total_downtime_gained %></h3>
 <h3>Total Down Time Ever Used: <%= @character.total_downtime_lost %></h3>
 <h3>Current Down Time: <%= @character.downtime %></h3>
