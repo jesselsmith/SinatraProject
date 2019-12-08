@@ -33,4 +33,12 @@ class AdventureLog < ActiveRecord::Base
   def downtime_after
     downtime_before + downtime_change
   end
+
+  def magic_items_gained
+    MagicItem.where(adventure_log_gained_id: self.id)
+  end
+
+  def magic_items_lost
+    MagicItem.where(adventure_log_lost_id: self.id)
+  end
 end
