@@ -1,70 +1,11 @@
 <h1>Make a new adventure log!</h1>
-<form action="/adventure-logs" method="POST">
-  <p>
-    <strong><label for="adventure_name">Adventure Name: </label></strong>
-    <input type="text" name="adventure_name" id="adventure_name" size="60"
-      placeholder="DDAL05-01 Treasure of the Broken Horde">
-  </p>
-  <p>
-    <strong><label for="character">Character: </label></strong>
-    <select name="character">
-      <% @user.characters.order(:name).each do |character| %>
-        <option value="<%=character.id%>"><%= character.name %></option>
-      <% end %>
-    </select>
-  </p>
-  <p>
-    <strong><label for="dm_name">DM Name: </label></strong>
-    <input type="text" name="dm_name" id="dm_name" placeholder="John Smith">
-  </p>
-  <p>
-    <strong><label for="dm_dci">DM DCI # (if applicable): </label></strong>
-    <input type="text" name="dm_dci" id="dm_dci" size="12" placeholder="1234567890">
-  </p>
-  <p>
-    <strong><label for="date">Date: </label></strong>
-    <input type="date" name="date_played" id="date">
-  </p>
-  <p>
-    <strong><label for="gold_gained">Gold Gained: </label></strong>
-    <input type="number" name="gold_gained" id="gold_gained" placeholder="0">
-  </p>
-   <p>
-    <strong><label for="gold_lost">Gold Spent/Lost: </label></strong>
-    <input type="number" name="gold_lost" id="gold_lost" placeholder="0">
-  </p>
-  <p>
-    <strong>Level Up?: </strong>
-    <input type="checkbox" name="level_up" id="level_up" value="true">
-  </p>
-  <p>
-    <strong><label for="downtime_gained">Down Time Gained(if applicable): </label></strong>
-    <input type="number" name="downtime_gained" id="downtime_gained" placeholder="0">
-  </p>
-   <p>
-    <strong><label for="downtime_lost">Down Time Used(if applicable): </label></strong>
-    <input type="number" name="downtime_lost" id="downtime_lost" placeholder="0">
-  </p>
-  <p>
-    <strong><label for="magic_items_gained">Magic Items Gained (put each on its own line): </label></strong>
-    <textarea name="magic_items_gained" id="magic_items_gained" rows="5" cols="50"
-      placeholder="Put each Magic Item gained on its own line, like below:
-Cape of the Mountebank
-Amulet of Health"></textarea>
-  </p>
-  <p>
-    <strong><label for="magic_items_lost">Magic Items Lost (put each on its own line, must be exact): </label></strong>
-    <textarea name="magic_items_lost" id="magic_items_lost" rows="5" cols="50"
-      placeholder="Put each Magic Item lost on its own line, like below (must match exact name):
-Cape of the Mountebank
-Amulet of Health"></textarea>
-  </p>
-  <p>
-    <strong><label for="notes">Notes: </label></strong>
-    <textarea name="notes" id="notes" rows="10" cols="60"
-      placeholder="Record important events and notes here!"></textarea>
-  </p>
-  <input type="submit" value="Create Adventure Log">
-</form>
-<p><a href='/adventure_logs'>All Your Adventure Logs</a></p>
+<h2>Which character would you like to make an Adventure Log for?</h2>
+<ul>
+  <% @user.characters.each do |character| %>
+    <li><a href="/adventure-logs/new/<%= character.slug %>">
+      <%= character.name %></a></li>
+  <% end %>
+</ul>
+<p><a href="/characters/new">Make a new character!</a><p>
+<p><a href='/adventure-logs'>All Your Adventure Logs</a></p>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>

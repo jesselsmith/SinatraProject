@@ -3,7 +3,7 @@ class MagicItem < ActiveRecord::Base
 
   def self.new_from_string(string)
     string.split("\n").map do |substring|
-      self.new(name: substring.strip)
+      self.new(name: substring.strip) unless substring.strip.empty?
     end
   end
 

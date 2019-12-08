@@ -12,6 +12,8 @@
 <h3>Gold Lost: <%= @adventure_log.gold_lost %></h3>
 <h3>Gold Change: <%= @adventure_log.gold_change %></h3>
 <h3>Gold After: <%= @adventure_log.gold_after %></h3>
+<h3>Magic Items Gained: <%= @adventure_log.magic_items_gained %></h3>
+<h3>Magic Items Lost: <%= @adventure_log.magic_items_lost %></h3>
 <h3>Down Time Before: <%= @adventure_log.downtime_before %></h3>
 <h3>Down Time Gained: <%= @adventure_log.downtime_gained %></h3>
 <h3>Down Time Lost: <%= @adventure_log.downtime_lost %></h3>
@@ -20,7 +22,8 @@
 <h3><a href='/characters/<%= @adventure_log.character.slug %>/adventure-logs'>
   View all of <%= @adventure_log.character.name %>'s adventure logs!
 </a></h3>
-<p><a href='/adventure-logs/new'>Make a new Adventure Log</a></p>
+<p><a href='/adventure-logs/new/<%= @adventure_log.character.slug %>'>
+  Make a new Adventure Log for <%= @adventure_log.character.name %>!</a></p>
 <p><a href='/adventure-logs/<%= @adventure_log.id %>/edit'>
   Edit This Adventure Log
 </a></p>
