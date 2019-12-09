@@ -4,7 +4,6 @@ class AdventureLog < ActiveRecord::Base
 
   before_destroy do |log|
     log.magic_items_gained.each(&:destroy)
-    binding.pry
     log.magic_items_lost.each do |item|
       item.adventure_log_lost_id = nil
       item.save

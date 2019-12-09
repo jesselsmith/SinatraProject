@@ -1,5 +1,5 @@
 <h1><%= @character.name %>'s Logs</h1>
-<% @character.adventure_logs.each do |adventure_log| %>
+<% @character.adventure_logs.order(date_played: :desc, id: :desc).each do |adventure_log| %>
   <p>
   <a href="/adventure-logs/<%= adventure_log.id %>">
   <%= "#{adventure_log.adventure_name} #{adventure_log.date_played}" %></a>

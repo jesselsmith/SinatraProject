@@ -36,10 +36,7 @@ class AdventureLogsController < ApplicationController
       @adventure_log = AdventureLog.find_by(id: params[:id])
       if @adventure_log&.user == current_user
         @magic_items = @adventure_log.character.magic_items -
-                       item_string_to_items(
-                         @adventure_log.magic_items_gained,
-                         @adventure_log.character_id
-                       )
+                       @adventure_log.magic_items_gained
         erb :'adventure-logs/edit'
       else
         redirect '/dashboard'
@@ -102,9 +99,37 @@ class AdventureLogsController < ApplicationController
       adventure_log = AdventureLog.find_by(id: params[:id])
       if adventure_log&.user == current_user
         log_hash = log_hasher(params[:adventure_log])
-        magic_items_to_lose = MagicItem.where(name:
-              item_string_to_array(params[:magic_items_lost]))
-        if valid_log_hash(log_hash, magic_items_to_lose)
+        new_items_gained_array = params[:adventure_log][:magic_items_gained].split("\n").map(&:strip)
+        old_items_gained_array = adventure_log.magic_items_gained.map(&:name)
+        magic_items_to_destroy = old_items_gained_array -
+                                 new_items_gained_array
+        magic_items_to_create = new_items_gained_array - old_items_gained_array
+        old_items_lost_array = adventure_log.magic_items_lost.map(&:id)
+        magic_items_to_lose = params[:adventure_log][:magic_items_lost] -
+                              old_items_lost_array
+        magic_items_to_gain = old_items_lost_array - params[:adventure_log][:magic_items_lost]
+        
+        MagicItem.find(magic_items_to_gain).each do |item|
+          item.adventure_log_lost_id = nil
+          item.character = adventure_log.character
+          item.save
+        end
+
+        MagicItem.find(magic_items_to_lose).each do |item|
+          item.adventure_log_lost_id = adventure_log.id
+          item.character = nil
+          item.save
+        end
+
+        MagicItem.where(name: magic_items_to_destroy, character: adventure_log.character).each(&:destroy)
+
+        new_items = magic_items_to_create.map do |item_name|
+          item = MagicItem.new(name: item_name)
+          item.adventure_log_gained_id = adventure_log.id
+          item.character = adventure_log.character
+          item.save
+        end
+        if valid_log_hash(log_hash)
 
           adventure_log.update(log_hash)
           redirect "/adventure-logs/#{adventure_log.id}"
@@ -157,8 +182,10 @@ class AdventureLogsController < ApplicationController
     unless item_id_array.nil? || item_id_array.empty?
       magic_items_lost = MagicItem.find(item_id_array)
       adventure_log.magic_items_lost = magic_items_lost
-      magic_items_lost.each { |item| item.character = nil }
-      magic_items_lost.each(&:save)
+      magic_items_lost.each do |item|
+        item.character = nil
+        item.save
+      end
     end
   end
 

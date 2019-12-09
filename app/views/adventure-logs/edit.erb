@@ -55,7 +55,7 @@
       Magic Items Gained (put each on its own line): </label>
     </strong>
     <textarea name="adventure_log[magic_items_gained]" id="magic_items_gained"
-    rows="5" cols="50"><% @adventure_log.magic_items_gained.each{ |item| item.name + "\n" } %></textarea>
+    rows="5" cols="50"><%= @adventure_log.magic_items_gained.map(&:name).join("\n") %></textarea>
   </p>
   <p>
     <strong>Magic Items Lost: </strong>
@@ -69,10 +69,10 @@
         id="magic_item<%= magic_item.id %>" value="<%= magic_item.id %>">
           <%= magic_item.name %></li>
     <% end %>
-    <% @adventure_log.magic_items_lost.split("\n").each do |magic_item| %>
-      <li><input type="checkbox" name="adventure_log[magic_items_previously_lost][]" 
-        id="<%= magic_item %>" value="<%= magic_item %>" checked>
-          <%= magic_item %></li>
+    <% @adventure_log.magic_items_lost.each do |magic_item| %>
+      <li><input type="checkbox" name="adventure_log[magic_items_lost][]" 
+        id="magic_item<%= magic_item.id %>" value="<%= magic_item.id %>" checked>
+          <%= magic_item.name %></li>
     <% end %>
     </ul>
   </p>
