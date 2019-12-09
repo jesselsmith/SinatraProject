@@ -55,7 +55,7 @@
       Magic Items Gained (put each on its own line): </label>
     </strong>
     <textarea name="adventure_log[magic_items_gained]" id="magic_items_gained"
-    rows="5" cols="50"><%= @adventure_log.magic_items_gained %></textarea>
+    rows="5" cols="50"><% @adventure_log.magic_items_gained.each{ |item| item.name + "\n" } %></textarea>
   </p>
   <p>
     <strong>Magic Items Lost: </strong>

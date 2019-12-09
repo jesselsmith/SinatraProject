@@ -7,17 +7,12 @@ class MagicItem < ActiveRecord::Base
     end
   end
 
-  def self.new_from_adventure_log(adventure_log)
-    new_items = self.new_from_string(adventure_log.magic_items_gained)
-    adventure_log.character.magic_items << new_items
-  end
-
   def adventure_log_gained
     AdventureLog.find(adventure_log_gained_id)
   end
 
-  def adventure_log_gained=(adventure_log_id)
-    self.sadventure_log_gained_id = adventure_log_id
+  def adventure_log_gained=(adventure_log)
+    self.sadventure_log_gained_id = adventure_log.id
   end
 
 
@@ -25,7 +20,7 @@ class MagicItem < ActiveRecord::Base
     AdventureLog.find(adventure_log_gained_id)
   end
 
-  def adventure_log_lost=(adventure_log_id)
-    self.adventure_log_gained_id = adventure_log_id
+  def adventure_log_lost=(adventure_log)
+    self.adventure_log_gained_id = adventure_log.id
   end
 end

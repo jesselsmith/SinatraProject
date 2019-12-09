@@ -2,6 +2,13 @@ class AdventureLog < ActiveRecord::Base
   belongs_to :character, foreign_key: "character_id"
   has_one :user, through: :character
 
+  after_destroy do |log|
+    log.magic_items_gained.each(&:destroy)
+    log.magic_items_lost.each do |item|
+      item.adventure_log_lost_id = nil
+    end
+  end
+
   def downtime_change
     self.downtime_gained - self.downtime_lost
   end
@@ -38,7 +45,25 @@ class AdventureLog < ActiveRecord::Base
     MagicItem.where(adventure_log_gained_id: self.id)
   end
 
+  def magic_items_gained=(magic_item_array)
+    (magic_item_array - magic_items_gained).each do |item|
+      item.adventure_log_gained_id = self.id
+    end
+    (magic_items_gained - magic_item_array).each do |item|
+      item.adventure_log_gained_id = nil
+    end
+  end
+
   def magic_items_lost
     MagicItem.where(adventure_log_lost_id: self.id)
+  end
+
+  def magic_items_lost=(magic_item_array)
+    (magic_item_array - magic_items_lost).each do |item|
+      item.adventure_log_lost_id = self.id
+    end
+    (magic_items_lost - magic_item_array).each do |item|
+      item.adventure_log_lost_id = nil
+    end
   end
 end

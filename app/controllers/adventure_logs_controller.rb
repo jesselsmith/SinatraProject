@@ -82,8 +82,8 @@ class AdventureLogsController < ApplicationController
         log_hash = log_hasher(params)
         if valid_log_hash(log_hash)
           adventure_log = character.adventure_logs.build(log_hash)
-          MagicItem.new_from_adventure_log(adventure_log)
-          destroy_magic_items(params)
+          gain_magic_items(params[:magic_items_gained], adventure_log)
+          lose_magic_items(params[:magic_items_lost], adventure_log)
           character.save
           redirect "/adventure-logs/#{adventure_log.id}"
         else
@@ -154,12 +154,18 @@ class AdventureLogsController < ApplicationController
     log_hash
   end
 
-
-  def destroy_magic_items(hash)
-    unless params[:magic_items_lost].nil?
-      MagicItem.find(hash[:magic_items_lost]).each(&:destroy)
-    end
+  def gain_magic_items(magic_item_string, adventure_log)
+    magic_items_gained = MagicItem.new_from_string(magic_item_string)
+    adventure_log.magic_items_gained = magic_items_gained
+    adventure_log.character.magic_items << magic_items_gained
   end
+
+  def lose_magic_items(item_id_array, adventure_log)
+    magic_items_lost = MagicItem.find(item_id_array)
+    adventure_log.magic_items_lost = magic_items_lost
+    magic_items_lost.each { |item| item.character = nil }
+  end
+
 
   def names_from_item_ids(array)
     if array.nil?
