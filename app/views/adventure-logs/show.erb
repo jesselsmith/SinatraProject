@@ -12,8 +12,18 @@
 <h3>Gold Lost: <%= @adventure_log.gold_lost %></h3>
 <h3>Gold Change: <%= @adventure_log.gold_change %></h3>
 <h3>Gold After: <%= @adventure_log.gold_after %></h3>
-<h3>Magic Items Gained: <%= @adventure_log.magic_items_gained %></h3>
-<h3>Magic Items Lost: <%= @adventure_log.magic_items_lost %></h3>
+<h3>Magic Items Gained:</h3>
+<ul>
+  <% @adventure_log.magic_items_gained.each do |item| %>
+    <li><%= item.name %></li>
+  <% end %>
+</ul>
+<h3>Magic Items Lost:</h3>
+<ul>
+  <% binding.pry; @adventure_log.magic_items_lost.each do |item| %>
+    <li><%= item.name %></li>
+  <% end %>
+</ul>
 <h3>Down Time Before: <%= @adventure_log.downtime_before %></h3>
 <h3>Down Time Gained: <%= @adventure_log.downtime_gained %></h3>
 <h3>Down Time Lost: <%= @adventure_log.downtime_lost %></h3>

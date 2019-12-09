@@ -15,7 +15,6 @@ class MagicItem < ActiveRecord::Base
     self.sadventure_log_gained_id = adventure_log.id
   end
 
-
   def adventure_log_lost
     AdventureLog.find(adventure_log_gained_id)
   end

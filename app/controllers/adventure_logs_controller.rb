@@ -81,7 +81,7 @@ class AdventureLogsController < ApplicationController
       if character&.user == current_user
         log_hash = log_hasher(params)
         if valid_log_hash(log_hash)
-          adventure_log = character.adventure_logs.build(log_hash)
+          adventure_log = character.adventure_logs.create(log_hash)
           gain_magic_items(params[:magic_items_gained], adventure_log)
           lose_magic_items(params[:magic_items_lost], adventure_log)
           character.save
@@ -144,13 +144,12 @@ class AdventureLogsController < ApplicationController
 
   # takes a hash from a form and returns a hash useful for creating a log
   def log_hasher(hash)
-    log_hash = hash.except(:character)
+    log_hash = hash.except(:character, :magic_items_gained, :magic_items_lost)
     log_hash[:gold_gained] = hash[:gold_gained].to_i
     log_hash[:gold_lost] = hash[:gold_lost].to_i
     log_hash[:downtime_gained] = hash[:downtime_gained].to_i
     log_hash[:downtime_lost] = hash[:downtime_lost].to_i
     log_hash[:level_up] = (hash[:level_up] == 'true')
-    log_hash[:magic_items_lost] = names_from_item_ids(hash[:magic_items_lost])
     log_hash
   end
 
@@ -161,11 +160,13 @@ class AdventureLogsController < ApplicationController
   end
 
   def lose_magic_items(item_id_array, adventure_log)
-    magic_items_lost = MagicItem.find(item_id_array)
-    adventure_log.magic_items_lost = magic_items_lost
-    magic_items_lost.each { |item| item.character = nil }
+    unless item_id_array.nil? || item_id_array.empty?
+      magic_items_lost = MagicItem.find(item_id_array)
+      adventure_log.magic_items_lost = magic_items_lost
+      magic_items_lost.each { |item| item.character = nil }
+      magic_items_lost.each(&:save)
+    end
   end
-
 
   def names_from_item_ids(array)
     if array.nil?
