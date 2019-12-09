@@ -2,10 +2,12 @@ class AdventureLog < ActiveRecord::Base
   belongs_to :character, foreign_key: "character_id"
   has_one :user, through: :character
 
-  after_destroy do |log|
+  before_destroy do |log|
     log.magic_items_gained.each(&:destroy)
+    binding.pry
     log.magic_items_lost.each do |item|
       item.adventure_log_lost_id = nil
+      item.save
     end
   end
 

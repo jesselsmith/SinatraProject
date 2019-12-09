@@ -123,17 +123,11 @@ class AdventureLogsController < ApplicationController
     if logged_in?
       adventure_log = AdventureLog.find_by(id: params[:id])
       if adventure_log&.user == current_user
-        destroy_items_in_string(
-          adventure_log.magic_items_gained,
-          adventure_log.character_id
-        )
-        magic_items_lost = MagicItem.new_from_string(
-          adventure_log.magic_items_lost
-        )
-        adventure_log.character.magic_items << magic_items_lost
-        adventure_log.character.save
+        character = adventure_log.character
+        character.magic_items << adventure_log.magic_items_lost
+        character.save
         adventure_log.destroy
-        redirect '/adventure-logs'
+        redirect "/characters/#{character.slug}/adventure-logs"
       else
         redirect '/dashboard'
       end

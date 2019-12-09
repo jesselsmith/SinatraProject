@@ -20,7 +20,7 @@
 </ul>
 <h3>Magic Items Lost:</h3>
 <ul>
-  <% binding.pry; @adventure_log.magic_items_lost.each do |item| %>
+  <% @adventure_log.magic_items_lost.each do |item| %>
     <li><%= item.name %></li>
   <% end %>
 </ul>
