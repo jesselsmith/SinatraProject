@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     user = User.new(params)
-    if valid_signup?(user) && user.save
+    if user.save
       session[:user_id] = user.id
       redirect "/dashboard"
     else
@@ -66,17 +66,13 @@ class ApplicationController < Sinatra::Base
     redirect '/login'
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
+  private
 
-    def current_user
-      User.find_by(id: session[:user_id])
-    end
+  def logged_in?
+    !!session[:user_id]
+  end
 
-    def valid_signup?(user)
-      !user.name.empty? && !user.email.empty? && !user.password_digest.empty?
-    end
+  def current_user
+    User.find_by(id: session[:user_id])
   end
 end

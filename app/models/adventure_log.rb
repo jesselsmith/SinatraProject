@@ -10,6 +10,14 @@ class AdventureLog < ActiveRecord::Base
     end
   end
 
+  validates :adventure_name, presence: true
+  validates :dm_name, presence: true
+  validates :gold_gained, presence: true, numericality: { only_integer: true }
+  validates :gold_lost, presence: true, numericality: { only_integer: true }
+  validates :downtime_gained, presence: true, numericality: { only_integer: true }
+  validates :downtime_lost, presence: true, numericality: { only_integer: true }
+  validates :date_played, presence: true
+  
   def downtime_change
     self.downtime_gained - self.downtime_lost
   end

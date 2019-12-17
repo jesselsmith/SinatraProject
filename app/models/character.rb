@@ -3,6 +3,11 @@ class Character < ActiveRecord::Base
   has_many :magic_items, dependent: :destroy
   belongs_to :user, foreign_key: "user_id"
 
+  validates :name, presence: true
+  validates :starting_level, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 21 }  
+  validates :starting_gold, presence: true, numericality: { only_integer: true }
+  validates :character_class, presence: true
+  
   extend Concerns::Slugifiable::ClassMethods
   include Concerns::Slugifiable::InstanceMethods
 

@@ -3,6 +3,6 @@
 <h3>Email: <%= @user.email %></h3>
 <h3>DCI #: <%= @user.dci.empty? ? 'None' : @user.dci %></h3>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>
-<p><a href='/users/<%= @user.slug %>/edit'>Edit Your Account Information</a></p>
-<p><a href='/users/<%= @user.slug %>/delete'>Delete Your Account</a></p>
+<p><a href='/users/<%= @user.id %>/edit'>Edit Your Account Information</a></p>
+<p><a href='/users/<%= @user.id %>/delete'>Delete Your Account</a></p>
 <p><a href='/logout'>Log Out</a></p>

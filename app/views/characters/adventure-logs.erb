@@ -5,8 +5,8 @@
   <%= "#{adventure_log.adventure_name} #{adventure_log.date_played}" %></a>
   </p>
 <% end %>
-<p><a href='/adventure-logs/new/<%= @character.slug %>'>
+<p><a href='/adventure-logs/new/<%= @character.id %>'>
   Make a NEW Adventure Log for <%= @character.name %>!</a></p>
-<p><a href='/characters/<%= @character.slug %>'>Back to This Character's Page</a></p>
+<p><a href='/characters/<%= @character.id %>'>Back to This Character's Page</a></p>
 <p><a href='/adventure-logs'>See ALL Your Adventure Logs</a></p>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>

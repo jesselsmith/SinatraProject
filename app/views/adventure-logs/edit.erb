@@ -83,5 +83,7 @@
   </p>
   <input type="submit" value="Update Adventure Log">
 </form>
+<p><a href='/characters/<%= @adventure_log.character.id %>/adventure-logs'>
+  Back to <%= @adventure_log.character.name %>'s Logs</a></p>
 <p><a href='/adventure_logs'>All Your Adventure Logs</a></p>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>

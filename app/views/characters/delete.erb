@@ -2,13 +2,13 @@
   Are you sure you would like to delete your level <%= 
   "#{@character.level} #{@character.character_class}, #{@character.name}?" %>
 </h1>
-<form action="/characters/<%= @character.slug %>" method="POST">
+<form action="/characters/<%= @character.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <label for="delete">Delete Character:</label>
   <input type="submit" value="Delete Character" id="delete">
 </form>
 <p>
-  <a href="/characters/<%= @character.slug %>">
+  <a href="/characters/<%= @character.id %>">
     Actually, just take me back to this character's page.
   </a>
 <p>

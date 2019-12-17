@@ -1,7 +1,7 @@
 <h1><%= @user.name %>'s Characters</h1>
 <% @user.characters.each do |character| %>
   <p>
-  <a href="/characters/<%= character.slug %>"><%= character.name %></a> 
+  <a href="/characters/<%= character.id %>"><%= character.name %></a> 
   <b>Class</b>: <%= character.character_class %> <b>Level</b>: <%= character.level %></p>
 <% end %>
 <p><a href='/characters/new'>Make a new character!</a></p>

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  get '/users/:slug' do
+  get '/users/:id' do
     if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      if @user&.id == session[:user_id]
+      @user = User.find_by_id(params[:id])
+      if @user == current_user
         erb :'users/show'
       else
         redirect '/dashboard'
@@ -12,10 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:slug/edit' do
+  get '/users/:id/edit' do
     if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      if @user&.id == session[:user_id]
+      @user = User.find_by_id(params[:id])
+      if @user == current_user
         erb :'users/edit'
       else
         redirect '/dashboard'
@@ -25,10 +25,10 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/:slug/delete' do
+  get '/users/:id/delete' do
     if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      if @user&.id == session[:user_id]
+      @user = User.find_by_id(params[:id])
+      if @user == current_user
         erb :'users/delete'
       else
         redirect '/dashboard'
@@ -38,19 +38,22 @@ class UsersController < ApplicationController
     end
   end
 
-  patch '/users/:slug' do
+  patch '/users/:id' do
     if logged_in?
-      user = User.find_by_slug(params[:slug])
-      if user&.id == session[:user_id]
-        if !params[:user][:name].empty? && !params[:user][:email].empty?
-          if params[:user][:password].empty?
-            user.update(params[:user].except(:password))
+      user = User.find_by_id(params[:id])
+      if user == current_user
+        if params[:user][:password].empty?
+          if user.update(params[:user].except(:password))
+            redirect '/dashboard'
           else
-            user.update(params[:user])
+            redirect "/users/#{params[:id]}/edit"
           end
-          redirect '/dashboard'
         else
-          redirect "/users/#{params[:slug]}/edit"
+          if user.update(params[:user])
+            redirect '/dashboard'
+          else
+            redirect "/users/#{params[:id]}/edit"
+          end
         end
       else
         redirect '/dashboard'
@@ -60,10 +63,10 @@ class UsersController < ApplicationController
     end
   end
 
-  delete '/users/:slug' do
+  delete '/users/:id' do
     if logged_in?
-      user = User.find_by_slug(params[:slug])
-      if user&.id == session[:user_id]
+      user = User.find_by_id(params[:id])
+      if user == current_user
         user.destroy
         redirect '/logout'
       else

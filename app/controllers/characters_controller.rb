@@ -18,10 +18,10 @@ class CharactersController < ApplicationController
     end
   end
 
-  get '/characters/:slug/edit' do
+  get '/characters/:id/edit' do
     if logged_in?
-      @character = Character.find_by_slug(params[:slug])
-      if @character&.user == current_user
+      @character = current_user.characters.find_by_id(params[:id])
+      if !!@character
         erb :'characters/edit'
       else
         redirect '/dashboard'
@@ -31,10 +31,10 @@ class CharactersController < ApplicationController
     end
   end
 
-  get '/characters/:slug/delete' do
+  get '/characters/:id/delete' do
     if logged_in?
-      @character = Character.find_by_slug(params[:slug])
-      if @character&.user == current_user
+      @character = current_user.characters.find_by_id(params[:id])
+      if !!@character
         erb :'characters/delete'
       else
         redirect '/dashboard'
@@ -44,10 +44,10 @@ class CharactersController < ApplicationController
     end
   end
 
-  get '/characters/:slug/adventure-logs' do
+  get '/characters/:id/adventure-logs' do
     if logged_in?
-      @character = Character.find_by_slug(params[:slug])
-      if @character&.user == current_user
+      @character = current_user.characters.find_by_id(params[:id])
+      if !!@character
         erb :'characters/adventure-logs'
       else
         redirect '/dashboard'
@@ -57,10 +57,10 @@ class CharactersController < ApplicationController
     end
   end
 
-  get '/characters/:slug' do
+  get '/characters/:id' do
     if logged_in?
-      @character = Character.find_by_slug(params[:slug])
-      if @character&.user == current_user
+      @character = current_user.characters.find_by_id(params[:id])
+      if !!@character
         erb :'characters/show'
       else
         redirect '/dashboard'
@@ -73,11 +73,9 @@ class CharactersController < ApplicationController
   post '/characters' do
     if logged_in?
       user = current_user
-      character_hash = character_hasher(params)
-      if valid_character_hash(character_hash)
-        character = user.characters.build(character_hash)
-        character.save
-        redirect "/characters/#{character.slug}"
+      character = user.characters.build(params)
+      if character.save
+        redirect "/characters/#{character.id}"
       else
         redirect '/characters/new'
       end
@@ -86,16 +84,14 @@ class CharactersController < ApplicationController
     end
   end
 
-  patch '/characters/:slug' do
+  patch '/characters/:id' do
     if logged_in?
-      character = Character.find_by_slug(params[:slug])
-      if character&.user == current_user
-        character_hash = character_hasher(params[:character])
-        if valid_character_hash(character_hash)
-          character.update(character_hash)
-          redirect "/characters/#{character.slug}"
+      character = current_user.characters.find_by_id(params[:id])
+      if !!character
+        if character.update(params[:character])
+          redirect "/characters/#{character.id}"
         else
-          redirect "/characters/#{character.slug}/edit"
+          redirect "/characters/#{character.id}/edit"
         end
       else
         redirect '/dashboard'
@@ -105,28 +101,17 @@ class CharactersController < ApplicationController
     end
   end
 
-  delete '/characters/:slug' do
+  delete '/characters/:id' do
     if logged_in?
-      character = Character.find_by_slug(params[:slug])
-      character.destroy if character&.user == current_user
-      redirect "/characters"
+      @character = current_user.characters.find_by_id(params[:id])
+      if !!@character
+        character.destroy
+        redirect "/characters"
+      else
+        redirect "/dashboard"
+      end
     else
       redirect '/login'
     end
-  end
-
-  # takes a hash from a form and returns a hash useful for creating a character
-  def character_hasher(hash)
-    character_hash = hash
-    character_hash[:starting_level] = hash[:starting_level].to_i
-    character_hash[:starting_gold] = hash[:starting_gold].to_i
-    character_hash[:starting_downtime] = hash[:starting_downtime].to_i
-    character_hash[:adventurers_league] = (hash[:adventurers_league] == 'true')
-    character_hash
-  end
-
-  def valid_character_hash(hash)
-    !hash[:name].empty? && !hash[:character_class].empty? &&
-      hash[:starting_level].positive? && hash[:starting_level] <= 20
   end
 end

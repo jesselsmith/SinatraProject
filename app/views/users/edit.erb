@@ -1,5 +1,5 @@
 <h1>Edit Your Account!</h1>
-<form action="/users/<%= @user.slug %>" method="POST">
+<form action="/users/<%= @user.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <p><strong><label for="email">Email: </label></strong>
   <input type="email" name="user[email]" id="email" value="<%= @user.email %>"></p>
@@ -12,4 +12,4 @@
   <input type="submit" value="Update Account">
 </form>
 <p><a href='/dashboard'>Back to the Dashboard</a></p>
-<p><a href='/users/<%= @user.slug %>/delete'>Delete Your Account</a></p>
+<p><a href='/users/<%= @user.id %>/delete'>Delete Your Account</a></p>

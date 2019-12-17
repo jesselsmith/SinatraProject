@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_08_233908) do
+ActiveRecord::Schema.define(version: 2019_12_16_233453) do
 
   create_table "adventure_logs", force: :cascade do |t|
     t.string "adventure_name"
     t.string "dm_name"
     t.string "dm_dci"
-    t.integer "gold_gained"
-    t.integer "downtime_gained"
+    t.integer "gold_gained", default: 0
+    t.integer "downtime_gained", default: 0
     t.string "notes"
     t.integer "character_id"
     t.datetime "created_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_12_08_233908) do
     t.string "name"
     t.integer "starting_level"
     t.integer "starting_gold"
-    t.integer "starting_downtime"
+    t.integer "starting_downtime", default: 0
     t.string "faction"
     t.boolean "adventurers_league"
     t.integer "user_id"

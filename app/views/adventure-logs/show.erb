@@ -29,10 +29,10 @@
 <h3>Down Time Lost: <%= @adventure_log.downtime_lost %></h3>
 <h3>Down Time Change: <%= @adventure_log.downtime_change %></h3>
 <h3>Down Time After: <%= @adventure_log.downtime_after %></h3>
-<h3><a href='/characters/<%= @adventure_log.character.slug %>/adventure-logs'>
+<h3><a href='/characters/<%= @adventure_log.character.id %>/adventure-logs'>
   View all of <%= @adventure_log.character.name %>'s adventure logs!
 </a></h3>
-<p><a href='/adventure-logs/new/<%= @adventure_log.character.slug %>'>
+<p><a href='/adventure-logs/new/<%= @adventure_log.character.id %>'>
   Make a new Adventure Log for <%= @adventure_log.character.name %>!</a></p>
 <p><a href='/adventure-logs/<%= @adventure_log.id %>/edit'>
   Edit This Adventure Log
@@ -40,7 +40,7 @@
 <p><a href='/adventure-logs/<%= @adventure_log.id %>/delete'>
   Delete This Adventure Log
 </a></p>
-<p><a href='/characters/<%= @adventure_log.character.slug %>'>
+<p><a href='/characters/<%= @adventure_log.character.id %>'>
   Back to <%= @adventure_log.character.name %>'s page
 </a></p>
 <p><a href='/adventure-logs'>All Your Adventure Logs</a></p>

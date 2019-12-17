@@ -1,5 +1,7 @@
 class MagicItem < ActiveRecord::Base
   belongs_to :character, foreign_key: "character_id"
+  validates :name, presence: true
+  
 
   def self.new_from_string(string)
     string.split("\n").map do |substring|

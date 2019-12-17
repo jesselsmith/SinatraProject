@@ -2,7 +2,7 @@
 <h2>Which character would you like to make an Adventure Log for?</h2>
 <ul>
   <% @user.characters.each do |character| %>
-    <li><a href="/adventure-logs/new/<%= character.slug %>">
+    <li><a href="/adventure-logs/new/<%= character.id %>">
       <%= character.name %></a></li>
   <% end %>
 </ul>
